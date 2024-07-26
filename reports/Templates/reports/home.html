@@ -6,119 +6,13 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}"> 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <style>
-    @keyframes rotating {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes glow {
-        0% {
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-        }
-        50% {
-            box-shadow: 0 0 80px rgba(255, 255, 255, 0.904);
-        }
-        100% {
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-        }
-    }
-
-    .icons {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 50px;
-    }
-
-    .icon {
-        margin: 30px; 
-        text-align: center;
-        width: 50px; 
-        height: 50px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-        border: 3px solid transparent;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.664);
-        cursor: pointer;
-        position: relative;
-        transition: transform 0.3s ease;
-    }
-
-    .icon:before {
-        content: '';
-        position: absolute;
-        top: -3px;
-        right: -3px;
-        bottom: -3px;
-        left: -3px;
-        border-radius: 10px;
-        background: conic-gradient(from 0deg, red, yellow, green, cyan, blue, magenta, red);
-        filter: blur(11px);
-        opacity: 0.75;
-        z-index: -1;
-        transition: opacity 0.3s ease;
-        opacity: 0;
-    }
-
-    .icon:hover:before {
-        opacity: 0.75;
-        animation: rotating 6s linear infinite reverse;
-    }
-
-    .icon i {
-        font-size: 30px;
-    }
-
-    .icon:hover {
-        transform: scale(1.1);
-    }
-
-    .nav-link:hover {
-        color: rgb(19, 44, 156);
-        background-clip: text;
-    }
-    .sidebar{
-        z-index: 1;
-    }
-
-    .content-wrapper {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .image-container {
-        background-color:#50fcf0; 
-        border-radius: 50%;
-        width: 100px; 
-        height: 100px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        animation: glow 2s infinite;
-    }
-
-    img {
-        padding-right:5px;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-
-    .welcome-text {
-        margin-top: 20px;
-    }
+ 
   </style>
 </head>
 <body>
@@ -148,12 +42,43 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" onclick="loadContent('convert_kift')">
-              <i class="bi bi-capsule" style="color: rgb(135, 22, 163); padding-right: 10px;"></i> Kidney Test
+              <i class="bi bi-capsule" style="color: rgb(0, 240, 248); padding-right: 10px;"></i> Kidney Test
             </a>
           </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dashboard' %}">
+                <i class="bi bi-grid-fill" style="color: orange; padding-right: 10px;"></i> Dashboard
+              </a>
+            </li>
+          {% endif %}
         </ul>
       </nav>
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="top-right-nav">
+          {% if user.is_authenticated %}
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-person-circle" style="color: #007bff; padding-right: 10px;"></i> Hello, {{ user.first_name }}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="#" id="viewDetails">
+                  <i class="bi bi-person"></i> View Details
+                </a>
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                  <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+              </div>
+            </div>
+          {% else %}
+            <a class="nav-link" href="{% url 'login' %}">
+              <i class="bi bi-box-arrow-in-right" style="color: green; padding-right: 10px;"></i> Login
+            </a>
+            <a class="nav-link" href="{% url 'sign_up_view' %}">
+              <i class="bi bi-person-plus" style="color: rgb(207, 114, 6); padding-right: 10px;"></i> Sign Up
+            </a>
+          {% endif %}
+        </div>
         <div id="main-content">
           <div class="content-wrapper">
             <div class="image-container">
@@ -175,12 +100,60 @@
                 <i class="bi bi-clipboard2-pulse-fill" style="color: rgb(51, 255, 0);"></i>
               </div>
               <div class="icon" onclick="loadContent('convert_kift')">
-                <i class="bi bi-capsule" style="color: rgb(135, 22, 163);"></i>
+                <i class="bi bi-capsule" style="color: rgb(0, 240, 248);"></i>
               </div>
             </div>
           </div>
         </div>
       </main>
+    </div>
+  </div>
+
+  
+  <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">Your Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        
+          <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+          <p>Age: {{ user.userprofile.age }}</p>
+          <p>Date of Birth: {{ user.userprofile.dob }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Delete Account</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          <form method="post" action="{% url 'delete_account' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -207,7 +180,7 @@
               <i class="bi bi-clipboard2-pulse-fill" style="color: rgb(51, 255, 0);"></i>
             </div>
             <div class="icon" onclick="loadContent('convert_kift')">
-              <i class="bi bi-capsule" style="color: rgb(135, 22, 163);"></i>
+              <i class="bi bi-capsule" style="color: rgb(0, 240, 248);"></i>
             </div>
           </div>
         </div>
@@ -221,6 +194,11 @@
           document.getElementById('main-content').innerHTML = html;
         });
     }
+    $(document).ready(function() {
+      $('#viewDetails').on('click', function() {
+        $('#detailsModal').modal('show');
+      });
+    });
   </script>
 </body>
 </html>

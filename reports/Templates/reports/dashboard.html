@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #60ec53, #2a9b46);
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px; 
+            margin-top: 20px;
+        }
+        th, td {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+            padding: 10px;
+            text-align: left;
+            background: transparent;
+            border-radius: 10px;
+            box-shadow: inset 1px 0 10px 1px rgba(0, 0, 0, 0.3); 
+        }
+        th {
+            background-color: #9d09aa;
+            color: white;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); 
+        }
+        tr:hover {
+            background-color: rgba(157, 9, 170, 0.1);
+            cursor: pointer;
+        }
+        .button-container {
+          padding-right: 10px;
+            text-align: right;
+        }
+        .button {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #01b7ff;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #1a0785;
+        }
+        h2{
+            text-align: center;
+        }
+    </style>
+    <script>
+        function goToDetail(id) {
+            window.location.href = `/reports/conversion/${id}/`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Conversion History</h2>
+    <div class="button-container">
+        <a href="{% url 'home' %}" class="button"> <i class="bi bi-house"></i></a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Result</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in history %}
+            <tr onclick="goToDetail('{{ record.id }}')">
+                <td>{{ record.conversion_type }}</td>
+                <td>{{ record.result|safe }}</td>
+                <td>{{ record.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

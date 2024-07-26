@@ -1,0 +1,97 @@
+.form-container {
+    background: transparent;
+    padding: 20px;
+    width: fit-content;
+    position: absolute;
+    top: 50%;
+    left: -100%;
+    transform: translate(-50%, -50%);
+    animation: slideInFromLeft 1s ease-in-out forwards;
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: -4;
+        left: -100%;
+    }
+    to {
+        opacity: 1;
+        left: 50%;
+    }
+}
+
+.heading {
+    animation: fadeInCenter 1s ease-in-out;
+}
+
+@keyframes fadeInCenter {
+    from {
+        opacity: 0;
+        transform: scale(0); 
+    }
+    to {
+        opacity: 1;
+        transform: scale(1); 
+    }
+}
+
+.custom-input {
+    border: 2px solid #e5fd0d;
+    border-radius: 20px; 
+    padding: 10px;
+    font-size: 16px; 
+    margin-bottom: 15px;
+    background: transparent; 
+    box-shadow: inset 0 1px 10px rgba(221, 245, 6, 0.849); 
+}
+
+.custom-input:focus {
+    background: transparent;
+    border-color: #6610f2; 
+    box-shadow: 0 0 5px rgba(102, 16, 242, 0.5); 
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: medium;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: aqua;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.form-group .custom-input {
+    flex: 2;
+}
+
+button {
+    background: linear-gradient(to right, #56027c, #a100c2);  
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 30px;  
+}
+
+button:hover {
+    background: linear-gradient(to right, #037380, #008cff);  
+}
+
+button:active {
+    background: linear-gradient(to right, #4a037a, #9200cc);  
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+button {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}

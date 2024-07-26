@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversion Detail</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #60ec53, #2a9b46);
+        }
+        .container {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+            padding: 20px;
+            background: transparent;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin: 50px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+        .button-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .button-container a {
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #2a9b46;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .button-container a:hover {
+            background-color: #1e7031;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Conversion Detail</h2>
+        <p><strong>Date:</strong> {{ entry.date }}</p>
+        <p><strong>Type:</strong> {{ entry.conversion_type }}</p>
+        <div>
+            <strong>Result:</strong>
+            <div>{{ entry.result|safe }}</div>
+        </div>
+        <div class="button-container">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

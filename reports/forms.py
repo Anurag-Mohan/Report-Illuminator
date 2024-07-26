@@ -1,5 +1,26 @@
 from django import forms
 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+
+class SignUpForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+    last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
+    age = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'placeholder': 'Age'}))
+    dob = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'age', 'dob', 'password1', 'password2')
+
+class LoginForm(AuthenticationForm):
+    """
+    Form for user login with username and password fields.
+    """
+    username = forms.CharField(max_length=150, required=True, widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+
+
 class BloodTestForm(forms.Form):
     hemoglobin = forms.FloatField(label='Hemoglobin', widget=forms.NumberInput(attrs={'class': 'form-control custom-input'}))
     white_blood_cells = forms.FloatField(label='White Blood Cells', widget=forms.NumberInput(attrs={'class': 'form-control custom-input'}))
