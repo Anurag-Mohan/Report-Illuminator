@@ -16,7 +16,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class ConversionHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    conversion_type = models.CharField(max_length=100)  # E.g., Blood Test, ECG, etc.
+    conversion_type = models.CharField(max_length=100)  
     result = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 

@@ -4,10 +4,37 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
-    last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
-    age = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'placeholder': 'Age'}))
-    dob = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
+    first_name = forms.CharField(
+        max_length=30, 
+        required=True, 
+        widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'})
+    )
+    last_name = forms.CharField(
+        max_length=30, 
+        required=True, 
+        widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'})
+    )
+    age = forms.IntegerField(
+        required=True, 
+        widget=forms.NumberInput(attrs={'placeholder': 'Age', 'class': 'form-control'})
+    )
+    dob = forms.DateField(
+        required=True, 
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
+    )
+    username = forms.CharField(
+        max_length=150,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Username', 'class': 'form-control'})
+    )
+    password1 = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})
+    )
+    password2 = forms.CharField(
+        label='Confirm Password',
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'class': 'form-control'})
+    )
 
     class Meta:
         model = User

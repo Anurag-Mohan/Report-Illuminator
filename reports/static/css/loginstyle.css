@@ -1,0 +1,102 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #4B6B4E;
+    margin: 0;
+}
+.login-container {
+    width: 400px;
+    background: #2C3E50;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    position: relative;
+    text-align: center;
+}
+.profile-icon-container {
+    width: 80px;
+    height: 80px;
+    background: #B3A66C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -60px auto 20px;
+}
+.profile-icon-container .fa-user {
+    font-size: 40px;
+    color: #2C3E50;
+}
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+.form-control {
+    border-radius: 20px;
+    padding: 10px 20px 10px 40px;
+    background: #34495E;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+}
+.form-control:focus {
+    background:transparent;
+    outline: none;
+    box-shadow: 0 0 5px 2px #B3A66C;
+}
+.form-control::placeholder {
+    color: #95A5A6;
+    transition: transform 0.2s, font-size 0.2s;
+}
+.form-control:focus::placeholder {
+    transform: translateY(-20px);
+    font-size: 0.75rem;
+    color: #B3A66C;
+}
+.form-group .fa {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #95A5A6;
+}
+button {
+    background: #B3A66C;
+    border: none;
+    color: #2C3E50;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+button:hover {
+    background: #A3946B;
+}
+.form-text {
+    text-align: center;
+    color: red;
+    font-size: 0.875rem;
+}
+.remember-me {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #95A5A6;
+    font-size: 0.875rem;
+}
+.remember-me input {
+    margin-right: 5px;
+}
+.login-container p {
+    color: #95A5A6;
+    text-align: center;
+}
+.login-container a {
+    color: #B3A66C;
+}

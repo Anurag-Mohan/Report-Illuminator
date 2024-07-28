@@ -24,14 +24,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 @login_required
+def clear_history(request):
+    user = request.user
+    ConversionHistory.objects.filter(user=user).delete()
+    messages.success(request, 'Your conversion history has been cleared successfully.')
+    return redirect('dashboard')
+    
+@login_required
 def delete_account(request):
     if request.method == 'POST':
         user = request.user
         user.delete()
         messages.success(request, 'Your account has been deleted successfully.')
-        return redirect('home')  # Redirect to a page after deletion, e.g., home
-
-    # If the request is not a POST, redirect to home or another page
+        return redirect('home')
     return redirect('home')
 
 
@@ -40,13 +45,13 @@ def sign_up_view(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.refresh_from_db()  # Load the profile instance created by the signal
+            user.refresh_from_db() 
             user.userprofile.first_name = form.cleaned_data.get('first_name')
             user.userprofile.last_name = form.cleaned_data.get('last_name')
             user.userprofile.age = form.cleaned_data.get('age')
             user.userprofile.dob = form.cleaned_data.get('dob')
             user.userprofile.save()
-            return redirect('login')  # Redirect to login after successful sign-up
+            return redirect('login') 
     else:
         form = SignUpForm()
     return render(request, 'reports/signup.html', {'form': form})

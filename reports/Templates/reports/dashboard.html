@@ -3,6 +3,7 @@
 <head>
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
             background: linear-gradient(to right, #60ec53, #2a9b46);
@@ -32,24 +33,28 @@
             cursor: pointer;
         }
         .button-container {
-          padding-right: 10px;
-            text-align: right;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
         }
         .button {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-weight: bold;
             padding: 10px 20px;
-            border-radius: 5px;
-            background-color: #01b7ff;
+            border-radius: 15px;
+            background-color: transparent;
             color: white;
             text-decoration: none;
+            border: 2px solid rgb(229, 255, 0);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
         .button:hover {
-            background-color: #1a0785;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffe601;
+            border-color: #1a690b;
         }
-        h2{
+        h2 {
             text-align: center;
         }
     </style>
@@ -62,8 +67,10 @@
 <body>
     <h2>Conversion History</h2>
     <div class="button-container">
+        <button class="button" data-toggle="modal" data-target="#clearHistoryModal" style="color: rgb(212, 15, 15);">Clear History</button>
         <a href="{% url 'home' %}" class="button"> <i class="bi bi-house"></i></a>
     </div>
+
     <table>
         <thead>
             <tr>
@@ -82,5 +89,30 @@
             {% endfor %}
         </tbody>
     </table>
+
+   
+    <div class="modal fade" id="clearHistoryModal" tabindex="-1" role="dialog" aria-labelledby="clearHistoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="clearHistoryModalLabel">Clear History Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to clear your conversion history?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="{% url 'clear_history' %}" class="btn btn-danger">Clear History</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
